@@ -1,0 +1,42 @@
+application: information-recovery
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+
+  
+- url: /
+  script: web.pages.index.app
+
+- url: /getSummary
+  script: api.getSummary.app
+
+- url: /search_with_stemming
+  script: web.pages.search_with_stemming.app
+
+- url: /searchResult
+  script: web.pages.searchResult.app
+
+- url: /searchResultWithStemming
+  script: web.pages.searchResultWithStemming.app
+
+- url: /static
+  static_dir: web/static
+
+- url: /BM25
+  script: api.BM25.app
+
+- url: /api/(.*)
+  script: api.\1.app
+
+- url: .*
+  script: main.app
+
+libraries:
+- name: webapp2
+  version: "2.5.2"
